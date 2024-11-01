@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="profile-container">
+        <h2>Профиль пользователя: {{ current_user.username }}</h2>
+        <img src="{{ url_for('static', filename='avatars/' + current_user.avatar) }}" alt="Аватар" class="avatar">
+        
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="avatar" accept="image/*" required>
+            <button type="submit">Сменить аватар</button>
+        </form>
+    </div>
+</body>
+</html>
+

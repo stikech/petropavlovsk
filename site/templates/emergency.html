@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset = "UTF-8">
+    <meta name="viewport"
+            content ="width=device-width, user-scalable=no, in
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet"  href="{{ url_for('static' , filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    <title>{% block title %}{% endblock %}</title>
+</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <header class="p-3 text-bg-dark">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Бутстрап"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="/events" class="nav-link px-2 text-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Мероприятия</font></font></a></li>
+          <li><a href="/notification" class="nav-link px-2 text-white"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Уведомления</font></font></a></li>
+          <li><a href="/services" class="nav-link px-2 text-white"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сервисы</font></font></a></li>
+          <li><a href="/feedback" class="nav-link px-2 text-white"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Отзывы</font></font></a></li>
+          <li><a href="/emergency" class="nav-link px-2 text-white"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Экстреные службы</font></font></a></li>
+          <li><a href="/qrcode" class="nav-link px-2 text-white"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Qr-Code</font></font></a></li>
+        </ul>
+
+        <div class="text-end">
+        </div>
+      </div>
+    </div>
+  </header>
+    <title>Экстренные службы Петропавловска</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Экстренные службы Петропавловска</h1>
+        <p>Быстрый доступ к экстренным службам для вашей безопасности</p>
+    </header>
+
+    <main>
+        <section class="emergency-services">
+            <h2>Номера экстренных служб</h2>
+            <div class="service">
+                <h3>Полиция</h3>
+                <p>Телефон: <a href="tel:102">102</a></p>
+                <button onclick="callService('102')">Позвонить</button>
+            </div>
+            <div class="service">
+                <h3>Скорая помощь</h3>
+                <p>Телефон: <a href="tel:103">103</a></p>
+                <button onclick="callService('103')">Позвонить</button>
+            </div>
+            <div class="service">
+                <h3>Пожарная служба</h3>
+                <p>Телефон: <a href="tel:101">101</a></p>
+                <button onclick="callService('101')">Позвонить</button>
+            </div>
+            <div class="service">
+                <h3>Газовая служба</h3>
+                <p>Телефон: <a href="tel:104">104</a></p>
+                <button onclick="callService('104')">Позвонить</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Экстренные службы Петропавловска. Все права защищены.</p>
+    </footer>
+
+    <script>
+        function callService(number) {
+            // Функция для вызова при нажатии кнопки на мобильных устройствах
+            window.location.href = "tel:" + number;
+        }
+    </script>
+</body>
+</html>

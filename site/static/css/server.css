@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #fff;
+}
+
+header {
+    background: #ffeb3b; /* Ярко-желтый фон для шапки */
+    color: #000; /* Черный текст для контраста */
+    padding: 10px 0;
+    text-align: center;
+}
+
+.services-list {
+    margin: 20px 0;
+}
+
+.service {
+    margin: 10px 0;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+#map {
+    height: 400px; /* Высота карты */
+    width: 100%; /* Ширина карты */
+}

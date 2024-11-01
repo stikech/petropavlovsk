@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset = "UTF-8">
+    <meta name="viewport"
+            content ="width=device-width, user-scalable=no, in
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet"  href="{{ url_for('static' , filename='css/net.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <header class="p-3 text-bg-dark">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Бутстрап"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="/events" class="nav-link px-2 text-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Мероприятия</font></font></a></li>
+          <li><a href="/notification" class="nav-link px-2 text-white"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Уведомления</font></font></a></li>
+          <li><a href="/services" class="nav-link px-2 text-white"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сервисы</font></font></a></li>
+          <li><a href="/feedback" class="nav-link px-2 text-white"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Отзывы</font></font></a></li>
+          <li><a href="/emergency" class="nav-link px-2 text-white"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Экстреные службы</font></font></a></li>
+          <li><a href="/qrcode" class="nav-link px-2 text-white"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Qr-Code</font></font></a></li>
+        </ul>
+
+        <div class="text-end">
+                  </div>
+      </div>
+    </div>
+  </header>
+    {% block body %}{% endblock %}
+</body>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMJozZrNzR4A0r2I_qsGowMyaP-Pgyg2U&libraries=places" async defer></script>
+</head>
+<body>
+
+    <header>
+        <h1>Мероприятия в Петропавловске</h1>
+    </header>
+
+    <main>
+        <section class="events-section">
+            <h2>Список мероприятий</h2>
+            
+            <!-- Отображение мероприятий -->
+            {% for event in events %}
+            <div class="event-card">
+                <h3>{{ event.name }}</h3>
+                <p><strong>Дата:</strong> {{ event.date }}</p>
+                <p><strong>Место:</strong> {{ event.location }}</p>
+                <p><strong>Координаты:</strong> {{ event.latitude }}, {{ event.longitude }}</p>
+            </div>
+            {% endfor %}
+        </section>
+
+        <!-- Форма для добавления нового мероприятия -->
+        <section class="event-form">
+            <h3>Добавьте новое мероприятие</h3>
+            <form action="/events" method="POST">
+                <div class="form-group">
+                    <label for="name">Название мероприятия:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Дата:</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="location">Место проведения:</label>
+                    <input type="text" id="location" name="location" required>
+                </div>
+                <div id="map"></div>
+                <input type="hidden" id="latitude" name="latitude">
+                <input type="hidden" id="longitude" name="longitude">
+                <button type="submit" class="submit-btn">Добавить</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        function initMap() {
+            const initialLocation = { lat: 54.8951, lng: 69.1606 }; // Координаты Петропавловска
+            const map = new google.maps.Map(document.getElementById("map"), {
+                center: initialLocation,
+                zoom: 12,
+            });
+
+            const input = document.getElementById("location");
+            const autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.bindTo("bounds", map);
+
+            const marker = new google.maps.Marker({
+                map,
+                anchorPoint: new google.maps.Point(0, -29),
+                draggable: true,
+            });
+
+            autocomplete.addListener("place_changed", () => {
+                marker.setVisible(false);
+                const place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    window.alert("Выберите место из выпадающего списка.");
+                    return;
+                }
+
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(17);
+                }
+
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+
+                // Устанавливаем значения для скрытых полей
+                document.getElementById("latitude").value = place.geometry.location.lat();
+                document.getElementById("longitude").value = place.geometry.location.lng();
+            });
+
+            // Сохраняем координаты при перемещении маркера вручную
+            marker.addListener("dragend", () => {
+                const position = marker.getPosition();
+                document.getElementById("latitude").value = position.lat();
+                document.getElementById("longitude").value = position.lng();
+            });
+        }
+
+        // Инициализация карты после загрузки страницы
+        window.onload = initMap;
+    </script>
+</body>
+</html>

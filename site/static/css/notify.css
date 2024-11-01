@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #fff8e1; /* Светло-желтый фон */
+}
+
+header {
+    background: #ffeb3b; /* Ярко-желтый фон для шапки */
+    color: #000; /* Черный текст для контраста */
+    padding: 10px 0;
+    text-align: center;
+}
+
+.notification-form, .notifications-list {
+    margin: 20px 0;
+    background: white; /* Белый фон для формы и списка уведомлений */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.notification {
+    margin: 10px 0;
+    padding: 10px;
+    border-left: 5px solid #ffeb3b; /* Жёлтая левая граница для уведомлений */
+    background-color: #fff9c4; /* Легкий желтый фон для уведомлений */
+}

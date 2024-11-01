@@ -1,0 +1,28 @@
+.qr-container {
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.qr-container h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.qr-container p {
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.qr-code img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
